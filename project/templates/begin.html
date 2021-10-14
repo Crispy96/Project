@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block titulo %} Movimientos {% endblock %}
+
+{% block contenido %}
+<h1>Movimientos</h1>
+            {% if items | length == 0 %}
+                <p>SIN MOVIMIENTOS</p>
+            {% else %}
+            <table class="paper">
+                
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>From</th>
+                    <th>Q</th>
+                    <th>To</th>
+                    <th>Q</th>
+                    <th>P.U</th>
+                </tr>
+                
+                {% for item in items %}
+                <tr class="table">
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.moneda_from }} </td>
+                    <td>{{ item.cantidad_from }} </td>
+                    <td>{{ item.moneda_to }} </td>
+                    <td>{{ item.cantidad_q }} </td>
+                    <td>{{ item.pu }} €</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <a class="rounded-button" href="/purchase">+</a>
+        {% endif %}
+{% endblock %}

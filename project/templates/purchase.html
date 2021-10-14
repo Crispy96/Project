@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %}Compra {% endblock %}
+
+{% block contenido_pagina %}
+            <h1>Compra de CRYPTOS</h1>
+
+            <form action="/purchase" method="post">
+               {{ el_formulario.hidden_tag() }}  
+                <div class="campo-formulario">
+                    {{ el_formulario.moneda_from.label() }}
+                    {{ el_formulario.from }}
+                </div>
+                <div class="campo-formulario">
+                    {{ el_formulario.Q.label() }}
+                    {{# el_formulario.concepto(placeholder="Lo que diga Felipe") #}}
+                </div>
+                <div class="campo-formulario">
+                    {{ el_formulario.moneda_to.label() }}
+                </div>
+
+                {{ el_formulario.submit() }}
+ 
+            </form>
+
+{% endblock%}
