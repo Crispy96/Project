@@ -1,26 +1,32 @@
 {% extends 'base.html' %}
 
-{% block titulo_pagina %}Compra {% endblock %}
+{% block titulo_pagina %} Compra {% endblock %}
 
 {% block contenido_pagina %}
+
             <h1>Compra de CRYPTOS</h1>
 
             <form action="/purchase" method="post">
-               {{ el_formulario.hidden_tag() }}  
+                
                 <div class="campo-formulario">
-                    {{ el_formulario.moneda_from.label() }}
-                    {{ el_formulario.from }}
+                   {{ el_formulario.moneda1.label() }}
+                   {{ el_formulario.moneda1() }}
                 </div>
                 <div class="campo-formulario">
-                    {{ el_formulario.Q.label() }}
-                    {{# el_formulario.concepto(placeholder="Lo que diga Felipe") #}}
-                </div>
+                    {{ el_formulario.moneda2.label() }}
+                    {{ el_formulario.moneda2() }}
+                </div>    
                 <div class="campo-formulario">
-                    {{ el_formulario.moneda_to.label() }}
+                    {{ el_formulario.cantidad.label() }}
+                    {{ el_formulario.cantidad() }}
+                </div>
+                <div class="calculator">
+                    {{el_formulario.calculator.labels()}}
+                    <input class="boton"><img src="/static/image/calculadora2.png" width="50" height="50"></a>
+                    
                 </div>
 
-                {{ el_formulario.submit() }}
- 
             </form>
-
+            <p>Q:</p>
+            <label></label>
 {% endblock%}

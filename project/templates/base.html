@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptocurrency | {% block titulo %}{% endblock %}</title>
+    <title>Cryptocurrency | {% block titulo_pagina %}{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/flat_remix.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 
@@ -15,9 +15,14 @@
     </header>
     <selction class="contenedor">
         <nav>
-            <p><a href="/">Inicio</a> | <a href="purchase">Compra</a> | <a href="status">Status</a></p>
+            <p><a href="/">Inicio</a> | <a href="/purchase">Compra</a> | <a href="/status">Status</a></p>
         </nav>
-        {%block contenido %}{% endblock %}
+        {% with mesajes = get_flashed_messages() %}
+            {% for mensaje in mensajes %}
+            <p class="error">{{ mensaje }}</p>
+            {% endfor %}
+        {% endwith %}    
+        {% block contenido_pagina %}{% endblock %}
     </selction>
     <footer>
         <p>

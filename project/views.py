@@ -12,14 +12,11 @@ def begin():
     movimientos = dbManager.consultaSQL(consulta)
 
     return render_template("begin.html", items=movimientos)
+
 @app.route("/purchase", methods=['GET', 'POST'])
-def new():
+def purchase():
     formulario= MovimientosFormulario()
     if request.method == 'GET':
-        return render_template("purchase.html", el_formulario=formulario)
+        return render_template("purchase.html", el_formulario = formulario)
     else:
-        return "NO VA"
-
-@app.route("/status")
-def results():
-    pass
+        pass      

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block titulo %} Movimientos {% endblock %}
+{% block titulo_pagina %} Movimientos {% endblock %}
 
-{% block contenido %}
+{% block contenido_pagina %}
 <h1>Movimientos</h1>
             {% if items | length == 0 %}
                 <p>SIN MOVIMIENTOS</p>
@@ -30,6 +30,9 @@
                 </tr>
                 {% endfor %}
             </table>
-            <a class="rounded-button" href="/purchase">+</a>
+            <a href="/status" class="red-button">Status</a>
+            <a href="/purchase" class="red-button">+</a>
+          
         {% endif %}
+        
 {% endblock %}
