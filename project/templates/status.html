@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block titulo_pagina %} Compra {% endblock %}
+
+{% block contenido_pagina %}
+
+<h1>Estado de la inversión</h1>
+                <div>
+                    <label for="invest">Invertido:</label>
+                    <input type="text" value="{{ invest }}">
+                </div>
+                <div>
+                    <label for="valor">Valor Actual:</label>
+                    <input type="text" value="{{ valor }}">
+
+                </div>
+                   
+                <a href="/" class="red-button">Volver</a>
+                  
+                  
+
+           
+{% endblock%}

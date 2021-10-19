@@ -9,24 +9,33 @@
             <form action="/purchase" method="post">
                 
                 <div class="campo-formulario">
-                   {{ el_formulario.moneda1.label() }}
-                   {{ el_formulario.moneda1() }}
+                   {{ form.moneda_from.label() }}
+                   {{ form.moneda_from() }}
+                   {{ form.moneda_to.label() }}
+                    {{ form.moneda_to() }}
                 </div>
-                <div class="campo-formulario">
-                    {{ el_formulario.moneda2.label() }}
-                    {{ el_formulario.moneda2() }}
+                   
+                <div class="formulario">
+                    {{ form.cantidad_from.label() }}
+                    {{ form.cantidad_from() }}
+                    {% for error in form.cantidad_from.error %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                    {{ form.calculator() }}
+                    {{ form.cantidad_to.data }}
+                    {{ form.cantidad_toH()}}
+                </div>
+                <div>  
+                    {{ form.pu() }}
+                    {{ form.puH()}}
                 </div>    
-                <div class="campo-formulario">
-                    {{ el_formulario.cantidad.label() }}
-                    {{ el_formulario.cantidad() }}
-                </div>
-                <div class="calculator">
-                    {{el_formulario.calculator.labels()}}
-                    <input class="boton"><img src="/static/image/calculadora2.png" width="50" height="50"></a>
-                    
-                </div>
-
+                
+              
+                {{ form.submit()}}
             </form>
-            <p>Q:</p>
+            
+                  
+                  
+            
             <label></label>
 {% endblock%}
