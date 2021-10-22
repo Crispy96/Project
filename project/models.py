@@ -34,6 +34,7 @@ class DBManager():
         return registros
 
     def insertSQL(self, consulta, params):
+        
         conexion = sqlite3.connect(self.route_database)
 
         cur = conexion.cursor()
@@ -56,5 +57,3 @@ class DBManager():
         return total
 
 
-    
- 
