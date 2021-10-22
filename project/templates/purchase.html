@@ -7,8 +7,10 @@
             <h1>Compra de CRYPTOS</h1>
 
             <form action="/purchase" method="post">
-                
+                {{ form.hidden_tag() }}
                 <div class="campo-formulario">
+                    
+                    
                    {{ form.moneda_from.label() }}
                    {{ form.moneda_from() }}
                    {{ form.moneda_to.label() }}
@@ -17,21 +19,27 @@
                    
                 <div class="formulario">
                     {{ form.cantidad_from.label() }}
-                    {{ form.cantidad_from() }}
+                    {{ form.cantidad_from(placeholder="¿Cuanto quieres invertir?") }}
                     {% for error in form.cantidad_from.error %}
                         <p class="error">{{ error }}</p>
                     {% endfor %}
+                  
                     {{ form.calculator() }}
-                    {{ form.cantidad_to.data }}
-                    {{ form.cantidad_toH()}}
+ 
+                <div> 
+                    {{ form.cantidad_to.label() }} 
+                    {{ form.cantidad_toH.data }} 
+                    {{ form.cantidad_toH()}} 
+
                 </div>
                 <div>  
-                    {{ form.pu() }}
+                    {{ form.pu.label() }}
+                    {{ form.puH.data }}
                     {{ form.puH()}}
                 </div>    
-                
               
-                {{ form.submit()}}
+                    {{ form.submit()}}
+                
             </form>
             
                   

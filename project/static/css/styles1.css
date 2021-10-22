@@ -1,0 +1,16 @@
+html{
+    background-color: black;
+}
+
+* { 
+    margin: 16px;
+    padding: 1px;
+}
+
+footer {
+    margin-top: 10px 
+}
+
+.calculator {
+    
+}
