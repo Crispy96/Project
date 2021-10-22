@@ -8,22 +8,27 @@
 
             <form action="/purchase" method="post">
                 {{ form.hidden_tag() }}
-                <div class="campo-formulario">
-                    {{ form.date.data}}
-                    {{ form.date() }}
+                <div>
+                    {{ form.date.date}}
+                    {{ form.date }}
+
                     {{ form.time.date }}
-                    {{ form.time() }}
+                    {{ form.time }}
+                    
                     
                    {{ form.moneda_from.label() }}
                    {{ form.moneda_from() }}
+                   {% for message in get_flashed_messages() %}
+                   <div  class=flash>{{ message }}</div>
+                       {% endfor %}
+                   
+                   
                    {{ form.moneda_to.label() }}
                     {{ form.moneda_to() }}
-                    {% for error in form.moneda_to.errors %}
-                    <p class="error">{{ error }}</p>
-                    {% endfor %}
                 </div>
                    
-                <div class="formulario">
+                   
+                <div>
                     {{ form.cantidad_from.label() }}
                     {{ form.cantidad_from(placeholder="¿Cuanto quieres invertir?") }}
                     {% for error in form.cantidad_from.errors %}
@@ -31,13 +36,16 @@
                     {% endfor %}
                   
                     {{ form.calculator() }}
- 
+                
+                
                 <div> 
-                    {{ form.cantidad_to.label() }} 
+                    {{ form.cantidad_to.label() }}
                     {{ form.cantidad_toH.data }} 
                     {{ form.cantidad_toH()}} 
+                    
 
                 </div>
+                
                 <div>  
                     {{ form.pu.label() }}
                     {{ form.puH.data }}
@@ -47,9 +55,7 @@
                     {{ form.submit()}}
                 
             </form>
+                 
             
-                  
-                  
             
-            <label></label>
 {% endblock%}

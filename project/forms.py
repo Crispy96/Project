@@ -1,14 +1,11 @@
-from datetime import datetime
+
 from flask_wtf import FlaskForm
 from wtforms.fields import HiddenField
-from wtforms import SelectField, FloatField, SubmitField, DateField, TimeField
-from wtforms.form import Form
-from wtforms.validators import DataRequired, EqualTo, NumberRange, ValidationError, NoneOf, InputRequired
+from wtforms import SelectField, FloatField, SubmitField
+
+from wtforms.validators import DataRequired, NumberRange
 from coin import MONEDAS
     
-
-    
-
 class Formulary(FlaskForm):
     date= HiddenField()
     time= HiddenField()
@@ -21,5 +18,11 @@ class Formulary(FlaskForm):
     cantidad_toH= HiddenField()
     calculator = SubmitField("Calcular")
     submit = SubmitField('Aceptar')
+
+class Formulary2(FlaskForm):
+    invest= FloatField("Innversión:")
+    investH = HiddenField()
+    estado=FloatField("Valor actual:")
+    estadoH= HiddenField()
 
     

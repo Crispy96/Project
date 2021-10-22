@@ -56,4 +56,3 @@ class DBManager():
         conexion.close()
         return total
 
-
