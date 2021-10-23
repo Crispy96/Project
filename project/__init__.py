@@ -6,6 +6,6 @@ from project.views import *
 
 class Api():
     url='https://rest.coinapi.io/v1/exchangerate/{}/{}'
-    apikey="A58F5EDA-00BC-4E43-B2C2-979F9A48884E"
-    cabecera = {"X-CoinAPI-Key": "A58F5EDA-00BC-4E43-B2C2-979F9A48884E"}
+    apikey="8C0131C4-430B-4CB8-A373-B76252A39275"
+    cabecera = {"X-CoinAPI-Key": "8C0131C4-430B-4CB8-A373-B76252A39275"}
 

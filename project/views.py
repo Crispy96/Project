@@ -30,8 +30,11 @@ def purchase():
     else:
           
         if formulario.validate():
-                
+            
+         
             if formulario.calculator.data:
+             
+                  
                 mf = formulario.moneda_from.data
                 mt = formulario.moneda_to.data
                 qf = formulario.cantidad_from.data
@@ -44,19 +47,25 @@ def purchase():
                     return render_template("purchase.html", form=formulario)  
                 if mf != 'EUR':
                     consulta= "SELECT SUM(cantidad_from) FROM movimientos WHERE moneda_from= '{}' "
-                    sumFrom= dbManager.consultaSQL(consulta.format(mf))
+                    sumFrom= dbManager.consultaSQL(consulta.format(mf), formulario.data)
                     consulta= "SELECT SUM(cantidad_to) FROM movimientos WHERE moneda_to= '{}' "
-                    sumTo= dbManager.consultaSQL(consulta.format(mt))
-                    if sumFrom == None:
-                        sumFrom = 0
-                    if sumTo == None:
-                        sumTo == 0
-                    dispocoin= sumTo-sumFrom
+                    sumTo= dbManager.consultaSQL(consulta.format(mf), formulario.data)
+                    
+                    if sumFrom[0]['SUM(cantidad_from)'] == None:
+                        sumFrom[0]['SUM(cantidad_from)'] = 0
+                    
+                    print("*****aqui1***", sumFrom)
+                    if sumTo[0]['SUM(cantidad_to)'] == None:
+                        sumTo[0]['SUM(cantidad_to)'] = 0
+                   
+                    print("*****aqui***", sumTo)
+                    dispocoin= sumTo[0]['SUM(cantidad_to)'] - sumFrom[0]['SUM(cantidad_from)']
+                    print("*****aqui3***", dispocoin)
                     if dispocoin - float(qf) <-0:
                         flash("No dispones de monedas para comprar")
                         print(dispocoin-float(qf))
                         return render_template("purchase.html", form=formulario)
-                    print("*****aqui***", sumFrom)
+                    
                 api=Api()
                     
                 
@@ -112,7 +121,9 @@ def status():
     e='EUR'
     sol= requests.get ((api.url).format(e, meth), headers = api.cabecera)    
     dic = sol.json()
+    
     ETHrate=dic['rate']
+    
     ETHeur=ETHrate*ETHsol
     
     #LTC
@@ -126,6 +137,7 @@ def status():
     mltc='LTC'
     sol= requests.get ((api.url).format(e, mltc), headers = api.cabecera)    
     dic2 = sol.json()
+    
     LTCrate=dic2['rate']
     LTCeur=LTCrate*LTCsol
     
@@ -254,9 +266,9 @@ def status():
     dic12 = sol.json()
     ADArate=dic12['rate']
     ADAeur=ADArate* ADAsol
-    print("****AQUÏ***", ADAeur)
     
-    sumCOIN= ETHsol+LTCsol+BNBsol+EOSsol+XLMsol+TRXsol+BTCsol+XRPsol+BCHsol+USDTsol+ADAsol
+    
+    sumCOIN= ETHeur+LTCeur+BNBeur+EOSeur+XLMeur+TRXeur+BTCeur+XRPeur+BCHeur+USDTeur+ADAeur
     estado =sumCOIN-inversion
     if request.method == 'GET':
         formulario.investH.data = inversion

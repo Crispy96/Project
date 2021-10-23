@@ -5,7 +5,8 @@ from wtforms import SelectField, FloatField, SubmitField
 
 from wtforms.validators import DataRequired, NumberRange
 from coin import MONEDAS
-    
+
+
 class Formulary(FlaskForm):
     date= HiddenField()
     time= HiddenField()
@@ -18,6 +19,7 @@ class Formulary(FlaskForm):
     cantidad_toH= HiddenField()
     calculator = SubmitField("Calcular")
     submit = SubmitField('Aceptar')
+    
 
 class Formulary2(FlaskForm):
     invest= FloatField("Innversión:")
