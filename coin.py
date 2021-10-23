@@ -13,6 +13,3 @@ MONEDAS= ['',
         'USDT',
         'ADA']
 
-
-
-

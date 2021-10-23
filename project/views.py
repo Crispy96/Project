@@ -30,11 +30,8 @@ def purchase():
     else:
           
         if formulario.validate():
-            
-         
+ 
             if formulario.calculator.data:
-             
-                  
                 mf = formulario.moneda_from.data
                 mt = formulario.moneda_to.data
                 qf = formulario.cantidad_from.data

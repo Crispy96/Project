@@ -1,4 +1,5 @@
 
+
 from flask_wtf import FlaskForm
 from wtforms.fields import HiddenField
 from wtforms import SelectField, FloatField, SubmitField
@@ -26,5 +27,3 @@ class Formulary2(FlaskForm):
     investH = HiddenField()
     estado=FloatField("Valor actual:")
     estadoH= HiddenField()
-
-    
