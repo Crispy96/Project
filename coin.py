@@ -11,7 +11,6 @@ MONEDAS= ['',
         'XRP',
         'BCH',
         'USDT',
-        'BSV',
         'ADA']
 
 
