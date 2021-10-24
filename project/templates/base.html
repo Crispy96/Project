@@ -6,17 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cryptocurrency | {% block titulo_pagina %}{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/flat_remix.css">
-    <link rel="stylesheet" href="/static/css/styles.css">
-
+    <link rel="stylesheet" href="/static/css/styles1.css">
+    
+    
 </head>
 <body>
     <header>
         <p>myCRYPTO</p>
     </header>
     <selction class="contenedor">
-        <nav>
-            <p><a href="/" >Inicio</a> | <a href="/purchase">Compra</a> | <a href="/status">Status</a></p>
+        <nav class="nav">
+            <p>
+            {% if disableInicio == Null %}
+                <a href="/">Inicio</a> 
+            {% else %}
+                <p >Inicio</p> 
+                {% endif %}
+            {% if disablePurchase == Null %}
+                <a href="/purchase">Compra</a>
+            {% else %}
+                <p>Compra</p>
+            {% endif %}
+            {% if disableStatus == Null %}
+                <a class="inactivo3" href="/status">Status</a>
+            {% else %}
+                <p>Compra</p>
+            {% endif %}
+            </p>
         </nav>
+        
         {% with mesajes = get_flashed_messages() %}
             {% for mensaje in mensajes %}
             <p class="error">{{ mensaje }}</p>

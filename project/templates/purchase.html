@@ -4,10 +4,11 @@
 
 {% block contenido_pagina %}
 
-            <h1>Compra de CRYPTOS</h1>
+            <h1 class="with-shadow">Compra de CRYPTOS</h1>
 
-            <form action="/purchase" method="post">
+            <form class="form" action="/purchase" method="post">
                 {{ form.hidden_tag() }}
+                <div class="with-shadow">
                 <div>
                     {{ form.date.date}}
                     {{ form.date }}
@@ -18,9 +19,7 @@
                     
                    {{ form.moneda_from.label() }}
                    {{ form.moneda_from() }}
-                   {% for message in get_flashed_messages() %}
-                   <div  class=flash>{{ message }}</div>
-                       {% endfor %}
+                   
                    
                    
                    {{ form.moneda_to.label() }}
@@ -37,10 +36,10 @@
                     {% for message in get_flashed_messages() %}
                     <div  class=flash>{{ message }}</div>
                         {% endfor %}
-                  
+                    
                     {{ form.calculator() }}
                 
-                
+                </div>
                 <div> 
                     {{ form.cantidad_to.label() }}
                     {{ form.cantidad_toH.data }} 
@@ -54,9 +53,11 @@
                     {{ form.puH.data }}
                     {{ form.puH()}}
                 </div>    
-              
+                <div>
+                    
                     {{ form.submit()}}
-                
+                </div>
+                </div>
             </form>
                  
             

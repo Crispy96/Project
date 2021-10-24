@@ -6,7 +6,7 @@ from project.forms import Formulary, Formulary2
 from project.models import DBManager
 import requests
 from datetime import datetime
-import sqlite3
+
 
 
 route_database = app.config.get("ROUTE_DATA_BASE")
@@ -17,20 +17,23 @@ def begin():
     consulta = """ SELECT * FROM movimientos ORDER by date """
     movimientos = dbManager.consultaSQL(consulta)
 
-    return render_template("begin.html", items=movimientos)
+    return render_template("begin.html", items=movimientos, disableInicio=True)
 
-@app.route("/purchase", methods=['GET', 'POST'])
+@app.route("/purchase", methods=['GET', 'POST'])   
+
 def purchase():
     formulario= Formulary()
     
     if request.method == 'GET':
         formulario.cantidad_toH.data = 0
         formulario.puH.data = 0
-        return render_template("purchase.html", form = formulario)
+        
+       
+        return render_template("purchase.html", form = formulario, disablePurchase=True)
     else:
           
         if formulario.validate():
- 
+           
             if formulario.calculator.data:
                 mf = formulario.moneda_from.data
                 mt = formulario.moneda_to.data
@@ -41,7 +44,7 @@ def purchase():
                 formulario.time.data = t
                 if mf == mt:
                     flash("Las monedas no pueden ser iguales") 
-                    return render_template("purchase.html", form=formulario)  
+                    return render_template("purchase.html", form=formulario, disablePurchase=True)  
                 if mf != 'EUR':
                     consulta= "SELECT SUM(cantidad_from) FROM movimientos WHERE moneda_from= '{}' "
                     sumFrom= dbManager.consultaSQL(consulta.format(mf), formulario.data)
@@ -51,27 +54,27 @@ def purchase():
                     if sumFrom[0]['SUM(cantidad_from)'] == None:
                         sumFrom[0]['SUM(cantidad_from)'] = 0
                     
-                    print("*****aqui1***", sumFrom)
+                   
                     if sumTo[0]['SUM(cantidad_to)'] == None:
                         sumTo[0]['SUM(cantidad_to)'] = 0
                    
-                    print("*****aqui***", sumTo)
+                   
                     dispocoin= sumTo[0]['SUM(cantidad_to)'] - sumFrom[0]['SUM(cantidad_from)']
-                    print("*****aqui3***", dispocoin)
+                   
                     if dispocoin - float(qf) <-0:
                         flash("No dispones de monedas para comprar")
                         print(dispocoin-float(qf))
-                        return render_template("purchase.html", form=formulario)
+                        return render_template("purchase.html", form=formulario, disablePurchase=True)
                     
                 api=Api()
                     
                 
                 sol= requests.get ((api.url).format(mf, mt), headers = api.cabecera)    
                 dic = sol.json()
-                formulario.cantidad_toH.data= qf * dic['rate']
-                formulario.puH.data = dic['rate']
+                formulario.cantidad_toH.data= round(qf * dic['rate'],6)
+                formulario.puH.data = round(dic['rate'],6 )
                 
-                return render_template("purchase.html", form=formulario)
+                return render_template("purchase.html", form=formulario, disablePurchase=True)
                 
             if formulario.submit.data:
                 consulta = """ INSERT INTO movimientos (date, time, moneda_from, cantidad_from, moneda_to, cantidad_to, pu)
@@ -84,11 +87,11 @@ def purchase():
                     print("Se ha producido un error de acceso a base de datos:", e)
                     flash("Se ha producido un error en la base de datos. Consulte con su administrador")
 
-                    return render_template("purchase.html", form=formulario)
+                    return render_template("purchase.html", form=formulario, disablePurchase=True)
 
-            return redirect(url_for("begin"))
+            return redirect(url_for("begin"), disableInicio=True)
         else: 
-            return render_template("purchase.html", form = formulario)
+            return render_template("purchase.html", form = formulario, disablePurchase=True)
         
         
       
@@ -271,5 +274,5 @@ def status():
         formulario.investH.data = inversion
         formulario.estadoH.data = estado
     
-    return render_template("status.html", form=formulario)
+    return render_template("status.html", form=formulario, disableStatus=True)
 

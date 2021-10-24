@@ -22,8 +22,7 @@ header *, footer *{
     color: var(--blanco);
     font-size: 1.5rem;
     padding: 2rem;
-    
-
+   
 }
 
 .contenedor {
@@ -37,7 +36,7 @@ table.paper {
     rows: black
 }
 
-
+label
 .campo-formulario .label {
     display: block;
     font-weight: bold;

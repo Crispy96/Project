@@ -1,16 +1,82 @@
-html{
-    background-color: black;
+
+body {
+    background-color: whitesmoke;
+    
 }
 
+h1{
+    width: 650px; 
+    margin: auto; 
+    text-align:center;
+    
+}
+nav {
+    margin: 0 15px 0 0;
+   
+}
+.inactivo {
+    
+}
+
+.form{
+    margin: auto; 
+    text-align:center
+}
+div{
+    margin: auto; 
+    text-align:center;
+     
+}
+label{
+    margin: auto; 
+    text-align:center
+
+}
+#submit {
+    margin: auto; 
+    
+}
+
+#calculator {
+    margin:auto;
+    background-image: url("https://www.freepik.es/vector-gratis/ilustracion-maquina-calculadora_2606086.htm#page=1&query=calculadora&position=1&from_view=search");
+    
+}
+
+.paper{
+    margin: auto; 
+    text-align:center
+    
+}
+
+
+table, th, td {
+    border: solid black;
+    border-collapse: collapse;
+    
+  }
 * { 
     margin: 16px;
     padding: 1px;
+}
+
+.sinmov {
+    margin: auto;
+    text-align: center;
+    
 }
 
 footer {
     margin-top: 10px 
 }
 
-.calculator {
-    
+.error{
+    color: darkred;
+    font-size: 0.8rem;
+    font-weight: blond;
+}
+.flash {
+    color: darkred;
+    font-size: 0.8rem;
+    font-weight: blond;
 }
