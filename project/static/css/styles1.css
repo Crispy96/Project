@@ -11,14 +11,24 @@ h1{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight:normal;
     font-size: 50px;
+    border-bottom:solid 3px whitesmoke;
 }
-nav {
+.nav {
     margin: 0 15px 0 0;
-   
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
 }
-.inactivo {
-    
+.contenedor{
+    overflow: hidden;
+    background-color: #333;
 }
+
 body{
     background-image: url("https://www.wallpaperuse.com/wallp/80-807163_m.jpg");
     
@@ -32,11 +42,17 @@ body{
 div{
     margin: auto; 
     text-align:center;
+    color:white;
+    font-size: 15px;
+    
      
 }
 label{
     margin: auto; 
-    text-align:center
+    text-align:center;
+    color: white;
+    
+    
 
 }
 #submit {
@@ -76,7 +92,7 @@ label{
 }
 
 table {
-    width: 55%;
+    width: 70%;
     border: 1px solid grey;
     text-align: left;
     border-collapse: collapse;
@@ -100,29 +116,37 @@ table {
  }
  .boton1{
     float:right;
-    margin-right: 600px;
+    margin-right: 400px;
     margin-bottom: 0px;
     margin-top: 20px;
+    
+
  }
  .boton{
     position: absolute;
-    margin-left: 600px;
+    margin-left: 400px;
     margin-top: 20px;
+    font-size: 15px;
+    
  }
  caption {
     font-weight: bold;
     font-style: italic;
-
+    
 }
 .sinmov {
     margin: auto;
     text-align: center;
-    
+    font-size: 30px;
+    color: whitesmoke;
+    margin-bottom: 50px;
 }
 
 footer {
     margin-top: 150px ;
-    color: grey
+    color: white;
+    font-size: 15px;
+    margin-left: 15px;
 }
 
 .error{
@@ -132,10 +156,20 @@ footer {
 }
 .flash {
     color: darkred;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: blond;
 }
 .inactivo{
     color: white;
     
+}
+
+header {
+    font-size: 20px;
+    color: white;
+    margin-left: 15px;
+    
+}
+.estado{
+    font-size: 25px;
 }

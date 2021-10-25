@@ -5,6 +5,10 @@
 <h1>Movimientos</h1>
             {% if items | length == 0 %}
                 <p class="sinmov">SIN MOVIMIENTOS</p>
+                <div> 
+                    <a href="/status" class="boton">Status</a>
+                    <a href="/purchase" class="boton1">+</a>
+                </div>
             {% else %}
             <table class="paper">
                 
@@ -31,8 +35,8 @@
                 {% endfor %}
             </table>
             <div> 
-            <a href="/status" class="boton">Status</a>
-            <a href="/purchase" class="boton1">+</a>
+                <a href="/status" class="boton">Status</a>
+                <a href="/purchase" class="boton1">+</a>
             </div>
         {% endif %}
         

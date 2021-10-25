@@ -8,12 +8,12 @@
 
             <form action="/status" method="post">
                   {{ form.hidden_tag() }}
-                <div>
+                <div class="estado">
                    {{ form.invest.label() }}
                    {{ form.investH.data }}
                    {{ form.investH() }}
                 </div>
-                <div> 
+                <div class="estado"> 
                    
                    {{ form.estado.label() }}
                    {{ form.estadoH.data}}

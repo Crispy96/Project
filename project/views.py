@@ -245,7 +245,7 @@ def status():
     XRPsol=XRPto-XRPfrom
     mxrp='XRP'
     if XLMsol==0:
-        XLMeur=0
+        XRPeur=0
     else:
         sol= requests.get ((api.url).format(e, mxrp), headers = api.cabecera)    
         dic8 = sol.json()
