@@ -1,47 +1,58 @@
 # Proyecto Final Bootcamp "Aprende a Programar desde 0" por Cristina Rodríguez
-1. [General Info](#general-info)
-2. [Technologies](#technologies)
-3. [Installation](#installation)
-4. [Collaboration](#collaboration)
-5. [FAQs](#faqs)
-### General Info
+## Información General
 ***
-Write down the general informations of your project. It is worth to always put a project status in the Readme file. This is where you can add it. 
+A continuación, presento mi prototipo de aplicación para la consulta y compra de criptomonedas con dinero ficticio.
 
+El balance del que dispones es indefinido y este es en euros(€). Podrás intercambiar criptos entre ellas si la moneda de origen ha sido comprada con euros previamente. 
+
+## Instalación de programas
 ***
-A list of technologies used within the project:
-* [Technologie name](https://example.com): Version 12.3 
-* [Technologie name](https://example.com): Version 2.34
-* [Library name](https://example.com): Version 1234
-## Installation
-***
-A little intro about the installation. 
+1. Deberás activar el entorno virtual en tu consolta, para ello deberás escribir en tu consola:
 ```
-$ git clone https://example.com
-$ cd ../path/to/the/file
-$ npm install
-$ npm start
+> python -m venv venv
+> venv\Scripts\activate --->Windows
+        --o--
+> venv/bin/activate ---> Mac o Linux
 ```
-Side information: To use the application in a special environment use ```lorem ipsum``` to start
-## Collaboration
+2. Tendrás que clonar el repositorio de GitHub para que aparezca tu terminal. Puedes hacerlo de dos formas:
+```
+Opción 1: Creando un nuevo repositorio en remoto en GitHub:
+> git remote add origin https://github.com/Crispy96/Project.git
+```
+```
+Opción 2 Copiandolo directamente:
+> git clone https://github.com/Crispy96/Project.git
+```
+3. En el fichero requierments.txt encontraras los programas necesarios para su ejecución. Estos los podrás installar directamente a través del siguente comando.
+```
+> pip install -r requierments.txt
+```
+## Creación de la BBDD
 ***
-Give instructions on how to collaborate with your project.
-> Maybe you want to write a quote in this part. 
-> It should go over several rows?
-> This is how you do it.
-## FAQs
+Para la creación de la base de datos deberas de consultar la carpeta **migrations** dentro de esta encontraras el archivo:
+>inital.sql
+En el se especifica los campos que debe de tener la BBDD.
+### BBDD con SQLite
+1. Ejecute el programa SQLite y selecione **Nueva base de datos**
+2. Seleccione la carpeta del proyecto como lugar dónde crear la base de datos y guardela como **movimientos**
+3. En creación de la tabla deberás de añadir los campos que encontrarás en archivo **inital.sql**
+4. ¡LISTO! Tras guardar tu BBDD aparecerá para que puedas trabajar con ella.
+
+
+## Ejecución
+*** 
+Tras instalar todo lo dicho arriba deberás cambiar algunos fichero y añadir otros para el correcto funcionamiento de la aplicación.
+1. Tendrás que modificar el nombre del archivo config_template.py por **config.py**. También deberás de modifciar su contenido segun lo que explico más abajo.
+
+![Image text](project/static/image/config.PNG)
 ***
-A list of frequently asked questions
-1. **This is a question in bold**
-Answer of the first question with _italic words_. 
-2. __Second question in bold__ 
-To answer this question we use an unordered list:
-* First point
-* Second Point
-* Third point
-3. **Third question in bold**
-Answer of the third question with *italic words*.
-4. **Fourth question in bold**
-| Headline 1 in the tablehead | Headline 2 in the tablehead | Headline 3 in the tablehead |
-|:--------------|:-------------:|--------------:|
-| text-align left | text-align center | text-align right |
+Además deberás de modificar los siguentes campos:
+
+>ROUTE_DATA_BASE--> Deberás escribir la ruta para acceder a tu base de datos
+
+>SECRET_KEY --> Clave secreta (la que tu quieras)
+
+>apikey --> Tendrás que escribir tu apikey, si todavía no dispones de una la puedes obtener en el siguente enlace: https://www.coinapi.io/pricing?apikey
+2. El archivo .env_template deberá de ser renombrado a **.env** y modificado así:
+![Image text](project/static/image/.env.PNG)
+>FLASK_ENV--> deberá modificar su contenido por **development**.
