@@ -26,7 +26,7 @@ Opción 2 Copiandolo directamente:
 ```
 File--> Open Folder-->Tu carpeta
 ```
-4.Deberás activar el entorno virtual en tu consolta, para ello deberás escribir en tu consola:
+4. Deberás activar el entorno virtual en tu consolta, para ello deberás escribir en tu consola:
 ```
 > python -m venv venv
 > venv\Scripts\activate --->Windows
