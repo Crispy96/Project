@@ -14,12 +14,16 @@
                    {{ form.investH() }}
                 </div>
                 <div> 
+                   
                    {{ form.estado.label() }}
                    {{ form.estadoH.data}}
                    {{ form.estadoH() }}
 
                 </div>
-                
+                {% for message in get_flashed_messages() %}
+                    <div  class=flash>{{ message }}</div>
+                        {% endfor %}
+                    
                 
                 
             </form>

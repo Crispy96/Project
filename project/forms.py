@@ -3,14 +3,13 @@ from project.views import *
 from flask_wtf import FlaskForm
 from wtforms.fields import HiddenField
 from wtforms import SelectField, FloatField, SubmitField
-from controller import coin
-from wtforms.validators import DataRequired, NumberRange
-from coin import MONEDAS
-#from controller import *
 
+from wtforms.validators import DataRequired, NumberRange
+from project.__init__ import MONEDAS
 
 
 class Formulary(FlaskForm):
+    
     date= HiddenField()
     time= HiddenField()
     moneda_from = SelectField(u"From", choices=(MONEDAS), validators=[DataRequired(message="Tiene que indicar la moneda")])

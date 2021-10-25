@@ -1,9 +1,10 @@
 import sqlite3
 from project.__init__ import *
 from project.views import *
+from project import app
 
 
-
+route_database = app.config.get("ROUTE_DATA_BASE")
 class DBManager():
     def __init__(self, route_database):
         self.route_database = route_database
@@ -54,5 +55,15 @@ class DBManager():
             total = 0
         conexion.close()
         return total
-    
-    
+    def otorSql(self, consulta):
+        conexion= sqlite3.connect(self.route_database)
+        cur = conexion.cursor()
+        cur.execute(consulta)
+        
+        x=cur.fetchall()
+        
+    def sql():
+        conexion= sqlite3.connect(self.route_database)
+        cur = conexion.cursor()
+        cur.execute(consulta)
+        a=cur.fetchall()

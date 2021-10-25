@@ -1,14 +1,16 @@
 
-body {
-    background-color: whitesmoke;
-    
-}
+
 
 h1{
     width: 650px; 
     margin: auto; 
     text-align:center;
-    
+    margin-bottom: 70px;
+    margin-top: 70px;
+    color:silver;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:normal;
+    font-size: 50px;
 }
 nav {
     margin: 0 15px 0 0;
@@ -17,10 +19,15 @@ nav {
 .inactivo {
     
 }
-
+body{
+    background-image: url("https://www.wallpaperuse.com/wallp/80-807163_m.jpg");
+    
+   
+}
 .form{
     margin: auto; 
-    text-align:center
+    text-align:center;
+    
 }
 div{
     margin: auto; 
@@ -50,16 +57,63 @@ label{
 }
 
 
-table, th, td {
-    border: solid black;
-    border-collapse: collapse;
-    
-  }
-* { 
-    margin: 16px;
-    padding: 1px;
+.button2{
+    border-radius: 4px;
+    font-weight: bold;
+    color: #FFF;
+    margin-top: 7px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    height: 45px;
+    width: 120px;
+    border: 3px solid grey;
+    background: #E5F1F2;
+    line-height: 40px;
+    display: block;
+    transition: border .2s .2s, text-shadow .2s .2s, background .2s .2s, transform .2s, color .2s .2s, box-shadow .2s;
+    text-transform: capitalize;
 }
 
+table {
+    width: 55%;
+    border: 1px solid grey;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 0 0 1em 0;
+    caption-side: top;
+    border-radius: 25px;
+ }
+ caption, td, th {
+    padding: 0,2em;
+    background-color: #E5F1F2;
+    color:grey;
+    
+ }
+ th, td {
+    border-bottom: 2px solid white;
+    width: 15%;
+    height: auto;
+    font-size: 13px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+ }
+ .boton1{
+    float:right;
+    margin-right: 600px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+ }
+ .boton{
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 20px;
+ }
+ caption {
+    font-weight: bold;
+    font-style: italic;
+
+}
 .sinmov {
     margin: auto;
     text-align: center;
@@ -67,7 +121,8 @@ table, th, td {
 }
 
 footer {
-    margin-top: 10px 
+    margin-top: 150px ;
+    color: grey
 }
 
 .error{
@@ -79,4 +134,8 @@ footer {
     color: darkred;
     font-size: 0.8rem;
     font-weight: blond;
+}
+.inactivo{
+    color: white;
+    
 }

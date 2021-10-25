@@ -17,20 +17,16 @@
     <selction class="contenedor">
         <nav class="nav">
             <p>
-            {% if disableInicio == Null %}
-                <a href="/">Inicio</a> 
-            {% else %}
-                <p >Inicio</p> 
-                {% endif %}
+            {% if disableInicio == Null %}<a href="/">Inicio</a> {% else %}<a class=inactivo >Inicio</a> {% endif %}
             {% if disablePurchase == Null %}
                 <a href="/purchase">Compra</a>
             {% else %}
-                <p>Compra</p>
+                <a class="inactivo">Compra</a>
             {% endif %}
             {% if disableStatus == Null %}
-                <a class="inactivo3" href="/status">Status</a>
+                <a href="/status">Status</a>
             {% else %}
-                <p>Compra</p>
+                <a class="inactivo">Estado</a>
             {% endif %}
             </p>
         </nav>

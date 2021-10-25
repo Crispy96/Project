@@ -6,8 +6,7 @@ from project.forms import Formulary, Formulary2
 from project.models import DBManager
 import requests
 from datetime import datetime
-
-
+from config import *
 
 route_database = app.config.get("ROUTE_DATA_BASE")
 dbManager = DBManager(route_database)
@@ -16,7 +15,8 @@ dbManager = DBManager(route_database)
 def begin():
     consulta = """ SELECT * FROM movimientos ORDER by date """
     movimientos = dbManager.consultaSQL(consulta)
-
+    
+   
     return render_template("begin.html", items=movimientos, disableInicio=True)
 
 @app.route("/purchase", methods=['GET', 'POST'])   
@@ -34,12 +34,13 @@ def purchase():
           
         if formulario.validate():
            
-            if formulario.calculator.data:
+            if formulario.calculator.data: 
                 mf = formulario.moneda_from.data
                 mt = formulario.moneda_to.data
                 qf = formulario.cantidad_from.data
                 d= datetime.today().strftime('%Y-%m-%d')
                 t =datetime.today().strftime('%H:%M:%S')
+                
                 formulario.date.data = d
                 formulario.time.data = t
                 if mf == mt:
@@ -53,29 +54,28 @@ def purchase():
                     
                     if sumFrom[0]['SUM(cantidad_from)'] == None:
                         sumFrom[0]['SUM(cantidad_from)'] = 0
-                    
-                   
                     if sumTo[0]['SUM(cantidad_to)'] == None:
                         sumTo[0]['SUM(cantidad_to)'] = 0
-                   
-                   
                     dispocoin= sumTo[0]['SUM(cantidad_to)'] - sumFrom[0]['SUM(cantidad_from)']
                    
                     if dispocoin - float(qf) <-0:
-                        flash("No dispones de monedas para comprar")
+                        flash("No dispones de suficientes monedas para comprar. Consulta movimientos. ")
                         print(dispocoin-float(qf))
                         return render_template("purchase.html", form=formulario, disablePurchase=True)
                     
                 api=Api()
-                    
-                
-                sol= requests.get ((api.url).format(mf, mt), headers = api.cabecera)    
+                sol= requests.get ((api.url).format(mf, mt), headers = api.cabecera)   
                 dic = sol.json()
-                formulario.cantidad_toH.data= round(qf * dic['rate'],6)
+                try:
+                    formulario.cantidad_toH.data= round(qf * dic['rate'],6)
+                except Exception as e:
+                    print("Se ha producido un error ", e)
+                    flash("Hay un error con tu APIKEY. Comprueba que esta escrita correctamente. Si es así, has consumido el número total de consulta de esta. Puedes obtener otra en CoinAPI.")
+                    return render_template("purchase.html", form=formulario, disablePurchase=True)
+              
                 formulario.puH.data = round(dic['rate'],6 )
-                
                 return render_template("purchase.html", form=formulario, disablePurchase=True)
-                
+             
             if formulario.submit.data:
                 consulta = """ INSERT INTO movimientos (date, time, moneda_from, cantidad_from, moneda_to, cantidad_to, pu)
                                 VALUES (:date, :time, :moneda_from, :cantidad_from, :moneda_to, :cantidad_toH, :puH)   
@@ -89,7 +89,7 @@ def purchase():
 
                     return render_template("purchase.html", form=formulario, disablePurchase=True)
 
-            return redirect(url_for("begin"), disableInicio=True)
+            return redirect(url_for("begin"))
         else: 
             return render_template("purchase.html", form = formulario, disablePurchase=True)
         
@@ -119,12 +119,18 @@ def status():
     ETHsol=ETHto-ETHfrom
     meth='ETH'
     e='EUR'
-    sol= requests.get ((api.url).format(e, meth), headers = api.cabecera)    
-    dic = sol.json()
-    
-    ETHrate=dic['rate']
-    
-    ETHeur=ETHrate*ETHsol
+    if ETHsol == 0:
+        ETHeur=0
+    else:
+        sol= requests.get ((api.url).format(e, meth), headers = api.cabecera)
+        dic = sol.json()
+        try:
+            ETHrate=dic['rate']
+        except  Exception as e:
+            print("Se ha producido un error ", e)
+            flash("Hay un error con tu APIKEY. Comprueba que esta escrita correctamente. Si es así, has consumido el número total de consulta de esta. Puedes obtener otra en CoinAPI.")
+            return render_template("status.html", form=formulario, disableStatus=True)
+        ETHeur=ETHrate*ETHsol
     
     #LTC
     LTCfrom=float(dbManager.BalanceSQL(consultaFROM.format('LTC')))
@@ -135,11 +141,14 @@ def status():
         LTCto==0
     LTCsol=LTCto-LTCfrom
     mltc='LTC'
-    sol= requests.get ((api.url).format(e, mltc), headers = api.cabecera)    
-    dic2 = sol.json()
-    
-    LTCrate=dic2['rate']
-    LTCeur=LTCrate*LTCsol
+    if LTCsol == 0:
+        LTCeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mltc), headers = api.cabecera)    
+        dic2 = sol.json()
+        
+        LTCrate=dic2['rate']
+        LTCeur=LTCrate*LTCsol
     
     #BNB
     BNBfrom=float(dbManager.BalanceSQL(consultaFROM.format('BNB')))
@@ -150,11 +159,14 @@ def status():
         BNBto==0
     BNBsol=BNBto-BNBfrom
     mbnb='BNB'
-    sol= requests.get ((api.url).format(e, mbnb), headers = api.cabecera)    
-    dic3 = sol.json()
-    BNBrate=dic3['rate']
-    BNBeur=BNBrate*BNBsol
-    
+    if BNBsol==0:
+        BNBeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mbnb), headers = api.cabecera)    
+        dic3 = sol.json()
+        BNBrate=dic3['rate']
+        BNBeur=BNBrate*BNBsol
+        
     #EOS
     EOSfrom=float(dbManager.BalanceSQL(consultaFROM.format('EOS')))
     EOSto =  dbManager.BalanceSQL(consultaTO.format('EOS'))
@@ -164,10 +176,13 @@ def status():
         EOSto==0
     EOSsol=EOSto-EOSfrom
     meos='EOS'
-    sol= requests.get ((api.url).format(e, meos), headers = api.cabecera)    
-    dic4 = sol.json()
-    EOSrate=dic4['rate']
-    EOSeur=EOSrate*EOSsol
+    if EOSsol == 0:
+        EOSeur=0
+    else:
+        sol= requests.get ((api.url).format(e, meos), headers = api.cabecera)    
+        dic4 = sol.json()
+        EOSrate=dic4['rate']
+        EOSeur=EOSrate*EOSsol
     
     #XLM
     XLMfrom=float(dbManager.BalanceSQL(consultaFROM.format('XLM')))
@@ -178,10 +193,13 @@ def status():
         XLMto==0
     XLMsol=XLMto-XLMfrom
     mxlm='XLM'
-    sol= requests.get ((api.url).format(e, mxlm), headers = api.cabecera)    
-    dic5 = sol.json()
-    XLMrate=dic5['rate']
-    XLMeur=XLMrate*XLMsol
+    if XLMsol==0:
+        XLMeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mxlm), headers = api.cabecera)    
+        dic5 = sol.json()
+        XLMrate=dic5['rate']
+        XLMeur=XLMrate*XLMsol
     
     #TRX
     TRXfrom=float(dbManager.BalanceSQL(consultaFROM.format('TRX')))
@@ -192,10 +210,13 @@ def status():
         TRXto==0
     TRXsol=TRXto-TRXfrom
     mtrx='TRX'
-    sol= requests.get ((api.url).format(e, mtrx), headers = api.cabecera)    
-    dic6 = sol.json()
-    TRXrate=dic6['rate']
-    TRXeur=TRXrate*TRXsol
+    if TRXsol==0:
+        TRXeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mtrx), headers = api.cabecera)    
+        dic6 = sol.json()
+        TRXrate=dic6['rate']
+        TRXeur=TRXrate*TRXsol
     
     #BTC
     BTCfrom=float(dbManager.BalanceSQL(consultaFROM.format('BTC')))
@@ -206,10 +227,13 @@ def status():
         BTCto==0
     BTCsol=BTCto-BTCfrom
     mbtc='BTC'
-    sol= requests.get ((api.url).format(e, mbtc), headers = api.cabecera)    
-    dic7 = sol.json()
-    BTCrate=dic7['rate']
-    BTCeur=BTCrate*BTCsol
+    if BTCsol == 0:
+        BTCeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mbtc), headers = api.cabecera)    
+        dic7 = sol.json()
+        BTCrate=dic7['rate']
+        BTCeur=BTCrate*BTCsol
     
     #XRP
     XRPfrom=float(dbManager.BalanceSQL(consultaFROM.format('XRP')))
@@ -220,11 +244,14 @@ def status():
         XRPto==0
     XRPsol=XRPto-XRPfrom
     mxrp='XRP'
-    sol= requests.get ((api.url).format(e, mxrp), headers = api.cabecera)    
-    dic8 = sol.json()
-    XRPrate=dic8['rate']
-    XRPeur= XRPrate* XRPsol
-    
+    if XLMsol==0:
+        XLMeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mxrp), headers = api.cabecera)    
+        dic8 = sol.json()
+        XRPrate=dic8['rate']
+        XRPeur= XRPrate* XRPsol
+        
     #BCH
     BCHfrom=float(dbManager.BalanceSQL(consultaFROM.format('BCH')))
     BCHto =  dbManager.BalanceSQL(consultaTO.format('BCH'))
@@ -234,10 +261,13 @@ def status():
         BCHto==0
     BCHsol=BCHto-BCHfrom
     mbch='BCH'
-    sol= requests.get ((api.url).format(e, mbch), headers = api.cabecera)    
-    dic9 = sol.json()
-    BCHrate=dic9['rate']
-    BCHeur= BCHrate* BCHsol
+    if BCHsol==0:
+        BCHeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mbch), headers = api.cabecera)    
+        dic9 = sol.json()
+        BCHrate=dic9['rate']
+        BCHeur= BCHrate* BCHsol
     
     #USDT
     USDTfrom=float(dbManager.BalanceSQL(consultaFROM.format('USDT')))
@@ -248,10 +278,13 @@ def status():
         USDTto==0
     USDTsol=USDTto-USDTfrom
     musdt='USDT'
-    sol= requests.get ((api.url).format(e, musdt), headers = api.cabecera)    
-    dic10 = sol.json()
-    USDTrate=dic10['rate']
-    USDTeur= USDTrate* USDTsol
+    if USDTsol==0:
+        USDTeur=0
+    else:
+        sol= requests.get ((api.url).format(e, musdt), headers = api.cabecera)    
+        dic10 = sol.json()
+        USDTrate=dic10['rate']
+        USDTeur= USDTrate* USDTsol
     
     #ADA
     ADAfrom=float(dbManager.BalanceSQL(consultaFROM.format('ADA')))
@@ -262,10 +295,13 @@ def status():
         ADAto==0
     ADAsol=ADAto-ADAfrom
     mada='ADA'
-    sol= requests.get ((api.url).format(e, mada), headers = api.cabecera)    
-    dic12 = sol.json()
-    ADArate=dic12['rate']
-    ADAeur=ADArate* ADAsol
+    if ADAsol==0:
+        ADAeur=0
+    else:
+        sol= requests.get ((api.url).format(e, mada), headers = api.cabecera)    
+        dic12 = sol.json()
+        ADArate=dic12['rate']
+        ADAeur=ADArate* ADAsol
     
     
     sumCOIN= ETHeur+LTCeur+BNBeur+EOSeur+XLMeur+TRXeur+BTCeur+XRPeur+BCHeur+USDTeur+ADAeur
@@ -273,6 +309,8 @@ def status():
     if request.method == 'GET':
         formulario.investH.data = inversion
         formulario.estadoH.data = estado
-    
-    return render_template("status.html", form=formulario, disableStatus=True)
+        if estado <0:
+            flash("Prueba hacer mejores inversiones")    
+
+    return render_template("status.html", form=formulario, disableStatus=True )
 

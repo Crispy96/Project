@@ -369,7 +369,8 @@ input[type=submit],
 input[type=reset],
 .blue-button, input.blue-button,
 .red-button, input.red-button,
-.green-button, input.green-button {
+.green-button, input.green-button, .boton, .boton1
+{
     border-radius: 4px;
     font-weight: bold;
     color: #FFF;
@@ -379,8 +380,8 @@ input[type=reset],
     font-size: 16px;
     height: 45px;
     width: 120px;
-    border: 3px solid #272a34;
-    background: #737680;
+    border: 3px solid grey;
+    background: #E5F1F2;
     line-height: 40px;
     display: block;
     transition: border .2s .2s, text-shadow .2s .2s, background .2s .2s, transform .2s, color .2s .2s, box-shadow .2s;
