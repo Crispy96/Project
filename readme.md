@@ -5,14 +5,13 @@ A continuación, presento mi prototipo de aplicación para la consulta y compra 
 
 El balance del que dispones es indefinido y este es en euros(€). Podrás intercambiar criptos entre ellas si la moneda de origen ha sido comprada con euros previamente. 
 
-## Instalación de programas
+## Instalación 
 ***
-1. Deberás activar el entorno virtual en tu consolta, para ello deberás escribir en tu consola:
-```
-> python -m venv venv
-> venv\Scripts\activate --->Windows
-        --o--
-> venv/bin/activate ---> Mac o Linux
+1. Tendrás que crear una nueva carpeta con los comandos siguentes:
+``` 
+cd---> para moverte dentro de las carpetas de tu ordenador
+mkdir--> para crear la carpeta
+cd (nombre de tu nueva carpeta para acceder a esta)
 ```
 2. Tendrás que clonar el repositorio de GitHub para que aparezca tu terminal. Puedes hacerlo de dos formas:
 ```
@@ -23,7 +22,19 @@ Opción 1: Creando un nuevo repositorio en remoto en GitHub:
 Opción 2 Copiandolo directamente:
 > git clone https://github.com/Crispy96/Project.git
 ```
-3. En el fichero requierments.txt encontraras los programas necesarios para su ejecución. Estos los podrás installar directamente a través del siguente comando.
+3. Tendrás que abrir la carpeta que acabas de crear
+```
+File--> Open Folder-->Tu carpeta
+```
+4.Deberás activar el entorno virtual en tu consolta, para ello deberás escribir en tu consola:
+```
+> python -m venv venv
+> venv\Scripts\activate --->Windows
+        --o--
+> venv/bin/activate ---> Mac o Linux
+```
+
+5. En el fichero requierments.txt encontraras los programas necesarios para su ejecución. Estos los podrás installar directamente a través del siguente comando.
 ```
 > pip install -r requierments.txt
 ```
