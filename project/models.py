@@ -55,15 +55,4 @@ class DBManager():
             total = 0
         conexion.close()
         return total
-    def otorSql(self, consulta):
-        conexion= sqlite3.connect(self.route_database)
-        cur = conexion.cursor()
-        cur.execute(consulta)
-        
-        x=cur.fetchall()
-        
-    def sql():
-        conexion= sqlite3.connect(self.route_database)
-        cur = conexion.cursor()
-        cur.execute(consulta)
-        a=cur.fetchall()
+    
