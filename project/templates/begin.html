@@ -3,6 +3,10 @@
 
 {% block contenido_pagina %}
 <h1>Movimientos</h1>
+            {% for message in get_flashed_messages() %}
+            <div  class=flash>{{ message }}</div>
+                {% endfor %}
+
             {% if items | length == 0 %}
                 <p class="sinmov">SIN MOVIMIENTOS</p>
                 <div> 

@@ -56,3 +56,22 @@ class DBManager():
         conexion.close()
         return total
     
+MONEDAS= ['',
+        'EUR',
+        'ETH',
+        'LTC',
+        'BNB',
+        'EOS',
+        'XLM',
+        'TRX',
+        'BTC',
+        'XRP',
+        'BCH',
+        'USDT',
+        'ADA']
+
+
+class Api():
+    url='https://rest.coinapi.io/v1/exchangerate/{}/{}'
+    apikey = apikey
+    cabecera = {"X-CoinAPI-Key": apikey}

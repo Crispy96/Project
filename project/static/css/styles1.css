@@ -62,7 +62,7 @@ label{
 
 #calculator {
     margin:auto;
-    background-image: url("https://www.freepik.es/vector-gratis/ilustracion-maquina-calculadora_2606086.htm#page=1&query=calculadora&position=1&from_view=search");
+    
     
 }
 
@@ -87,7 +87,7 @@ label{
     background: #E5F1F2;
     line-height: 40px;
     display: block;
-    transition: border .2s .2s, text-shadow .2s .2s, background .2s .2s, transform .2s, color .2s .2s, box-shadow .2s;
+    transition: border .2s .2s, text-shadow .2s .2s, .2s .2s, transform .2s, color .2s .2s, box-shadow .2s;
     text-transform: capitalize;
 }
 
@@ -171,4 +171,13 @@ header {
 }
 .estado{
     font-size: 25px;
+}
+
+
+.ahora {
+    
+    font-size: 20px;
+    color: greenyellow;
+    
+    
 }

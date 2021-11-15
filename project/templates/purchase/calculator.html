@@ -5,40 +5,32 @@
 {% block contenido_pagina %}
             
             <h1 class="with-shadow">Compra de CRYPTOS</h1>
-           
+
             <form class="form" action="/purchase" method="post">
                 {{ form.hidden_tag() }}
                 <div class="with-shadow">
-                
-                    {{ form.date.date}}
-                    {{ form.date }}
+                <div class= disable>
+                    
 
                     {{ form.time.date }}
                     {{ form.time }}
-                </div>
                     
-                <div class="with-shadow">
-                {% if block ==True %}
-                    {{ form.moneda_from.label() }}
-                    {{ form.moneda_from() }} 
-                    {{ form.moneda_to.label() }}
+                  
+                
+                   {{ form.moneda_from() }}
+                   
+
+                    {{ form.moneda_to.label(disabled) }}
                     {{ form.moneda_to() }}
-                {% else %} 
-                <div class="pepe">
-                    <p class ="ahora">
-                    {{ form.moneda_from.label() }}
-                    {{ form.moneda_from(hidden=True)}}
-                    {{ form.moneda_from.data}}
-                    </p>
-                    <p class ="ahora">
-                    {{ form.moneda_to.label() }}
-                    {{ form.moneda_to(hidden=True)}}
-                    {{ form.moneda_to.data }}
-                    </p>
-                {% endif %}
+                
+                
+                   
+                    
+                
                 </div>
+                   
+                   
                 <div>
-                {% if block == True %}
                     {{ form.cantidad_from.label() }}
                     {{ form.cantidad_from(placeholder="¿Cuanto quieres invertir?") }}
                     {% for error in form.cantidad_from.errors %}
@@ -47,16 +39,6 @@
                     {% for message in get_flashed_messages() %}
                     <div  class=flash>{{ message }}</div>
                         {% endfor %}
-                {% else %}
-                    <p class ="ahora">
-                        {{ form.cantidad_from.label() }}
-                        {{ form.cantidad_from(hidden=True)}}
-                        {{ form.cantidad_from.data }}
-                        {% for message in get_flashed_messages() %}
-                    <div  class=flash>{{ message }}</div>
-                        {% endfor %}
-                    </p>
-                {% endif %}
                     
                     {{ form.calculator() }}
                     
@@ -78,17 +60,9 @@
                     
                     {{ form.submit()}}
                 </div>
-                
+                </div>
             </form>
+                 
             
-                      
+            
 {% endblock%}
-            
-
-
-
-
-
-
-
-
